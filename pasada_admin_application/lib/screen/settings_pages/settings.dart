@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:pasada_admin_application/config/palette.dart';
 import 'package:pasada_admin_application/screen/appbars_&_drawer/appbar_search.dart';
 import 'package:pasada_admin_application/screen/appbars_&_drawer/drawer.dart';
+import 'profilepopup.dart';
+import 'updatespopup.dart';
 
 class Settings extends StatefulWidget {
   @override
@@ -18,15 +20,12 @@ class _SettingsState extends State<Settings> {
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        // This outer Container fills the entire screen.
         child: Center(
-          // Centers the inner container
           child: Container(
-            // Constrain its width to 80% of the screen width for responsiveness.
             width: MediaQuery.of(context).size.width * 0.47,
             child: GridView.count(
               shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(), // Disables scrolling.
+              physics: NeverScrollableScrollPhysics(),
               crossAxisCount: 2,
               crossAxisSpacing: 16.0,
               mainAxisSpacing: 16.0,
@@ -46,7 +45,24 @@ class _SettingsState extends State<Settings> {
   Widget _buildContainer(String title) {
     return GestureDetector(
       onTap: () {
-        print("$title container clicked");
+        if (title == "Profile") {
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return ProfilePopup();
+            },
+          );
+        }
+        if (title == "Real-Time Updates"){
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return UpdatesPopup();
+            },
+          );
+        } else {
+          print("$title container clicked");
+        }
       },
       child: Container(
         padding: EdgeInsets.all(16.0),

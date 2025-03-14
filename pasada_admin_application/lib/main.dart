@@ -5,7 +5,7 @@ import 'package:pasada_admin_application/screen/main_pages/fleet_pages/fleet.dar
 import 'package:pasada_admin_application/screen/main_pages/drivers_pages/drivers.dart';
 import 'package:pasada_admin_application/screen/main_pages/reports_pages/reports.dart';
 import 'package:pasada_admin_application/screen/main_pages/ai_chat.dart';
-import 'package:pasada_admin_application/screen/main_pages/settings.dart';
+import 'package:pasada_admin_application/screen/settings_pages/settings.dart';
 import 'package:pasada_admin_application/screen/main_pages/drivers_pages/drivers_info.dart';
 import 'package:pasada_admin_application/screen/main_pages/fleet_pages/fleet_data.dart';
 import 'package:pasada_admin_application/screen/main_pages/reports_pages/reports_chat.dart';
