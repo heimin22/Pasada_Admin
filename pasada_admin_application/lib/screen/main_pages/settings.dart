@@ -15,18 +15,29 @@ class _SettingsState extends State<Settings> {
       backgroundColor: Palette.whiteColor,
       appBar: AppBarSearch(),
       drawer: MyDrawer(),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: GridView.count(
-          crossAxisCount: 2,
-          crossAxisSpacing: 16.0,
-          mainAxisSpacing: 16.0,
-          children: [
-            _buildContainer("Profile"),
-            _buildContainer("Notifications"),
-            _buildContainer("Real-Time Updates"),
-            _buildContainer("Security"),
-          ],
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        // This outer Container fills the entire screen.
+        child: Center(
+          // Centers the inner container
+          child: Container(
+            // Constrain its width to 80% of the screen width for responsiveness.
+            width: MediaQuery.of(context).size.width * 0.47,
+            child: GridView.count(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(), // Disables scrolling.
+              crossAxisCount: 2,
+              crossAxisSpacing: 16.0,
+              mainAxisSpacing: 16.0,
+              children: [
+                _buildContainer("Profile"),
+                _buildContainer("Notifications"),
+                _buildContainer("Real-Time Updates"),
+                _buildContainer("Security"),
+              ],
+            ),
+          ),
         ),
       ),
     );
@@ -35,7 +46,6 @@ class _SettingsState extends State<Settings> {
   Widget _buildContainer(String title) {
     return GestureDetector(
       onTap: () {
-        // Add your navigation logic here if the container is clickable
         print("$title container clicked");
       },
       child: Container(
@@ -45,7 +55,7 @@ class _SettingsState extends State<Settings> {
           borderRadius: BorderRadius.circular(8.0),
           boxShadow: [
             BoxShadow(
-              color: Palette.greyColor,
+              color: Palette.blackColor.withOpacity(0.5),
               spreadRadius: 2,
               blurRadius: 5,
               offset: Offset(0, 3),
@@ -53,10 +63,12 @@ class _SettingsState extends State<Settings> {
           ],
         ),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
               title,
+              textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 18.0,
                 fontWeight: FontWeight.bold,
@@ -65,6 +77,7 @@ class _SettingsState extends State<Settings> {
             SizedBox(height: 8.0),
             Text(
               "Placeholder text for $title",
+              textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 14.0,
                 color: Palette.blackColor.withOpacity(0.5),
