@@ -26,7 +26,6 @@ class Reports extends StatefulWidget {
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-              // Merged container for "Drivers Active", "Drivers Offline", and "Total Drivers"
               Container(
                 padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 8.0),
                 decoration: BoxDecoration(
@@ -76,6 +75,14 @@ class Reports extends StatefulWidget {
                       color: Palette.whiteColor,
                       border: Border.all(color: Palette.blackColor, width: 1.0),
                       borderRadius: BorderRadius.circular(10.0),
+                      boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                spreadRadius: 2,
+                                blurRadius: 5,
+                                offset: Offset(0, 3), // changes position of shadow
+                              ),
+                            ],
                       ),
                       child: Center(
                         child: Text(

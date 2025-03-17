@@ -63,22 +63,30 @@ class _DriversState extends State<Drivers> {
                     children: List.generate(12, (index) {
                       return GestureDetector(
                         onTap: () {
-                        Navigator.pushNamed(context, "/drivers_info");
+                          Navigator.pushNamed(context, "/drivers_info");
                         },
-                      child: Container(
-                      decoration: BoxDecoration(
-                      color: Palette.whiteColor,
-                      border: Border.all(color: Palette.blackColor, width: 1.0),
-                      borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      child: Center(
-                        child: Text(
-                          "Driver $index", // Example: Label for each item
-                          style: TextStyle(color: Palette.blackColor),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Palette.whiteColor,
+                            border: Border.all(color: Palette.blackColor, width: 1.0),
+                            borderRadius: BorderRadius.circular(10.0),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                spreadRadius: 2,
+                                blurRadius: 5,
+                                offset: Offset(0, 3), // changes position of shadow
                               ),
+                            ],
+                          ),
+                          child: Center(
+                            child: Text(
+                              "Driver $index", // Example: Label for each item
+                              style: TextStyle(color: Palette.blackColor),
                             ),
                           ),
-                        );
+                        ),
+                      );
                     }),
                   );
                 },

@@ -4,6 +4,8 @@ import 'package:pasada_admin_application/screen/appbars_&_drawer/appbar_search.d
 import 'package:pasada_admin_application/screen/appbars_&_drawer/drawer.dart';
 import 'profilepopup.dart';
 import 'updatespopup.dart';
+import 'securitypopup.dart';
+import 'notifpopup.dart';
 
 class Settings extends StatefulWidget {
   @override
@@ -60,7 +62,24 @@ class _SettingsState extends State<Settings> {
               return UpdatesPopup();
             },
           );
-        } else {
+        }
+        if (title == "Security"){
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return SecurityPopUp();
+            },
+          );
+        }
+        if (title == "Notifications") {
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return NotifPopUp();
+            },
+          );
+        }
+         else {
           print("$title container clicked");
         }
       },

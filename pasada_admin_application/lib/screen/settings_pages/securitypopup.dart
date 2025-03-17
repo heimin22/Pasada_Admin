@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:pasada_admin_application/config/palette.dart';
 
-class FleetData extends StatefulWidget {
+class SecurityPopUp extends StatelessWidget {
   @override
-  _FleetDataState createState() => _FleetDataState();
-}
-
-  class _FleetDataState extends State<FleetData> {
-    @override
-    Widget build(BuildContext context) {
+  Widget build(BuildContext context) {
     final double screenWidth = MediaQuery.of(context).size.width * 0.7;
     final double sideLength = screenWidth * 0.6;
     
@@ -29,7 +24,7 @@ class FleetData extends StatefulWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Fleet",
+                  "Security",
                   style: TextStyle(
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
@@ -52,7 +47,7 @@ class FleetData extends StatefulWidget {
             Expanded(
               child: SingleChildScrollView(
                 child: Text(
-                  "This is the Fleet popup. Add Fleet information here as needed.",
+                  "This is the Security popup. Add Security settings and additional information here as needed.",
                   style: TextStyle(
                     fontSize: 16,
                     color: Palette.blackColor,
@@ -77,7 +72,7 @@ class FleetData extends StatefulWidget {
                 onPressed: () {
                 },
                 child: Text(
-                  "Manage Fleet",
+                  "Edit Security",
                   style: TextStyle(
                     fontSize: 16,
                     color: Palette.blackColor,

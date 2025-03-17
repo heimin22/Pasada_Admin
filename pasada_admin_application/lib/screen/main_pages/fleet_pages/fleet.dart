@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pasada_admin_application/config/palette.dart';
 import 'package:pasada_admin_application/screen/appbars_&_drawer/appbar_search.dart';
 import 'package:pasada_admin_application/screen/appbars_&_drawer/drawer.dart';
+import 'fleet_data.dart';
 
 class Fleet extends StatefulWidget {
   @override
@@ -62,22 +63,35 @@ class _FleetState extends State<Fleet> {
                     children: List.generate(12, (index) {
                       return GestureDetector(
                         onTap: () {
-                        Navigator.pushNamed(context, "/fleet_data");
+                          showDialog(
+                          context: context,
+                            builder: (BuildContext context) {
+                            return FleetData();
+                            },
+                          );
                         },
-                      child: Container(
-                      decoration: BoxDecoration(
-                      color: Palette.whiteColor,
-                      border: Border.all(color: Palette.blackColor, width: 1.0),
-                      borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      child: Center(
-                        child: Text(
-                          "Kotse $index", // Example: Label for each item
-                          style: TextStyle(color: Palette.blackColor),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Palette.whiteColor,
+                            border: Border.all(color: Palette.blackColor, width: 1.0),
+                            borderRadius: BorderRadius.circular(10.0),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                spreadRadius: 2,
+                                blurRadius: 5,
+                                offset: Offset(0, 3), // changes position of shadow
                               ),
+                            ],
+                          ),
+                          child: Center(
+                            child: Text(
+                              "Kotse $index", // Example: Label for each item
+                              style: TextStyle(color: Palette.blackColor),
                             ),
                           ),
-                        );
+                        ),
+                      );
                     }),
                   );
                 },
@@ -96,7 +110,6 @@ class _FleetState extends State<Fleet> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            
             Text(
               count.toString(),
               style: TextStyle(
