@@ -33,6 +33,14 @@ class Reports extends StatefulWidget {
                   color: Palette.whiteColor,
                   border: Border.all(color: Palette.blackColor, width: 1.0),
                   borderRadius: BorderRadius.circular(10.0),
+                  boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                spreadRadius: 2,
+                                blurRadius: 5,
+                                offset: Offset(0, 3),
+                              ),
+                            ],
                 ),
                 child: Row(
                   children: [
