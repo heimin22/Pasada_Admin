@@ -6,8 +6,7 @@ import 'package:pasada_admin_application/screen/main_pages/drivers_pages/drivers
 import 'package:pasada_admin_application/screen/main_pages/reports_pages/reports.dart';
 import 'package:pasada_admin_application/screen/main_pages/ai_chat.dart';
 import 'package:pasada_admin_application/screen/settings_pages/settings.dart';
-import 'package:pasada_admin_application/screen/main_pages/drivers_pages/drivers_info.dart';
-import 'package:pasada_admin_application/screen/main_pages/reports_pages/reports_chat.dart';
+
 
 void main() {
   runApp(const MainApp());
@@ -30,8 +29,6 @@ class MainApp extends StatelessWidget {
         '/reports': (context) => Reports(),
         '/ai_chat': (context) => AiChat(),
         '/settings': (context) => Settings(),
-        '/drivers_info': (context) => DriversInfo(),
-        '/reports_chat': (context) => ReportsChat(),
       }
     );
   }

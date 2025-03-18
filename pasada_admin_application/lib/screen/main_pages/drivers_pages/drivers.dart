@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pasada_admin_application/config/palette.dart';
 import 'package:pasada_admin_application/screen/appbars_&_drawer/appbar_search.dart';
 import 'package:pasada_admin_application/screen/appbars_&_drawer/drawer.dart';
+import 'package:pasada_admin_application/screen/main_pages/drivers_pages/drivers_info.dart';
 
 class Drivers extends StatefulWidget {
   @override
@@ -63,7 +64,12 @@ class _DriversState extends State<Drivers> {
                     children: List.generate(12, (index) {
                       return GestureDetector(
                         onTap: () {
-                          Navigator.pushNamed(context, "/drivers_info");
+                          showDialog(
+                          context: context,
+                            builder: (BuildContext context) {
+                            return DriverInfo();
+                            },
+                          );
                         },
                         child: Container(
                           decoration: BoxDecoration(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pasada_admin_application/config/palette.dart';
 import 'package:pasada_admin_application/screen/appbars_&_drawer/appbar_search.dart';
 import 'package:pasada_admin_application/screen/appbars_&_drawer/drawer.dart';
+import 'package:pasada_admin_application/screen/main_pages/reports_pages/reports_chat.dart';
 
 class Reports extends StatefulWidget {
   @override
@@ -68,7 +69,12 @@ class Reports extends StatefulWidget {
                     children: List.generate(12, (index) {
                       return GestureDetector(
                         onTap: () {
-                        Navigator.pushNamed(context, "/reports_chat");
+                          showDialog(
+                          context: context,
+                            builder: (BuildContext context) {
+                            return ReportsDetails();
+                            },
+                          );
                         },
                       child: Container(
                       decoration: BoxDecoration(

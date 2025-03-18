@@ -1,22 +1,92 @@
 import 'package:flutter/material.dart';
 import 'package:pasada_admin_application/config/palette.dart';
-import 'package:pasada_admin_application/screen/appbars_&_drawer/appbar_search.dart';
-import 'package:pasada_admin_application/screen/appbars_&_drawer/drawer.dart';
 
-class ReportsChat extends StatefulWidget {
+class ReportsDetails extends StatefulWidget {
   @override
-  _ReportsChatState createState() => _ReportsChatState();
+  _ReportsDetailsState createState() => _ReportsDetailsState();
 }
 
-  class _ReportsChatState extends State<ReportsChat> {
+  class _ReportsDetailsState extends State<ReportsDetails> {
     @override
     Widget build(BuildContext context) {
-      return Scaffold(
+    final double screenWidth = MediaQuery.of(context).size.width * 0.7;
+    final double sideLength = screenWidth * 0.6;
+    
+    return Dialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12.0),
+      ),
       backgroundColor: Palette.whiteColor,
-      appBar: AppBarSearch(),
-      drawer: MyDrawer(),
-      body: Center(
-        child: Text('Reports Chat Page'),
+      child: Container(
+        width: sideLength,
+        height: sideLength,
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Report",
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                    color: Palette.blackColor,
+                  ),
+                ),
+                InkWell(
+                  onTap: () => Navigator.of(context).pop(),
+                  child: Icon(
+                    Icons.close,
+                    size: 24,
+                    color: Palette.blackColor,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 8.0),
+            Divider(color: Palette.blackColor.withOpacity(0.5)),
+            const SizedBox(height: 16.0),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Text(
+                  "This is the Report popup. Add Report information here as needed.",
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Palette.blackColor,
+                  ),
+                ),
+              ),
+            ),
+            Align(
+              alignment: Alignment.bottomRight,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Palette.whiteColor,
+                  foregroundColor: Palette.blackColor,
+                  elevation: 6.0,
+                  shadowColor: Colors.grey,
+                  side: BorderSide(color: Colors.grey, width: 1.0),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+                ),
+                onPressed: () {
+                },
+                child: Text(
+                  "Manage Report",
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Palette.blackColor,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
