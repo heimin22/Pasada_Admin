@@ -1,10 +1,75 @@
 import 'package:flutter/material.dart';
 import 'package:pasada_admin_application/config/palette.dart';
 
-class MyDrawer extends StatelessWidget {
+class MyDrawer extends StatefulWidget {
+  const MyDrawer({Key? key}) : super(key: key);
+
+  @override
+  _MyDrawerState createState() => _MyDrawerState();
+}
+
+class _MyDrawerState extends State<MyDrawer> {
+  // When not selected, this flag allows toggling the Reports dropdown.
+  bool _reportsExpanded = false;
+
+  /// A standard drawer item.
+  /// Optional parameters:
+  /// - hideIcon: if true, no leading icon is shown.
+  /// - customPadding: allows custom content padding.
+  Widget _createDrawerItem({
+    required BuildContext context,
+    required IconData icon,
+    required String text,
+    required String routeName,
+    required String currentRoute,
+    bool hideIcon = false,
+    EdgeInsetsGeometry? customPadding,
+  }) {
+    final bool selected = routeName == currentRoute;
+    return InkWell(
+      onTap: () {
+        Navigator.pop(context);
+        if (!selected) {
+          Navigator.pushReplacementNamed(context, routeName);
+        }
+      },
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 300),
+        margin: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+        decoration: BoxDecoration(
+          color: selected ? Palette.greyColor : Colors.transparent,
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+        child: ListTile(
+          contentPadding:
+              customPadding ?? const EdgeInsets.symmetric(horizontal: 8.0),
+          leading: hideIcon
+              ? const SizedBox(width: 0)
+              : Icon(
+                  icon,
+                  color: selected ? Palette.greenColor : Palette.blackColor,
+                ),
+          title: Text(
+            text,
+            style: TextStyle(
+              fontSize: 16,
+              color: Palette.blackColor,
+              fontWeight: selected ? FontWeight.bold : FontWeight.normal,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final String currentRoute = ModalRoute.of(context)?.settings.name ?? '';
+    // Determine if the current route is in the Reports group.
+    final bool reportsSelected =
+        currentRoute == '/reports' || currentRoute == '/data_tables';
+    // Always show the dropdown when a report route is selected.
+    final bool expanded = reportsSelected ? true : _reportsExpanded;
 
     return Drawer(
       child: Container(
@@ -31,6 +96,7 @@ class MyDrawer extends StatelessWidget {
                 ),
               ),
             ),
+            // Standard drawer items.
             _createDrawerItem(
               context: context,
               icon: Icons.dashboard,
@@ -45,13 +111,85 @@ class MyDrawer extends StatelessWidget {
               routeName: '/fleet',
               currentRoute: currentRoute,
             ),
-            _createDrawerItem(
-              context: context,
-              icon: Icons.bar_chart,
-              text: 'Reports',
-              routeName: '/reports',
-              currentRoute: currentRoute,
+            // --- Reports ListTile with dropdown ---
+            GestureDetector(
+              onTap: () {
+                // Only allow toggling if no Reports route is selected.
+                if (!reportsSelected) {
+                  setState(() {
+                    _reportsExpanded = !_reportsExpanded;
+                  });
+                }
+              },
+              onDoubleTap: () {
+                // Double tap immediately navigates to the default '/reports' (Quota).
+                setState(() {
+                  _reportsExpanded = false;
+                });
+                Navigator.pop(context);
+                Navigator.pushReplacementNamed(context, '/reports');
+              },
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 300),
+                margin:
+                    const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+                decoration: BoxDecoration(
+                  color: reportsSelected ? Palette.greyColor : Colors.transparent,
+                  borderRadius: BorderRadius.circular(8.0),
+                ),
+                child: ListTile(
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  leading: Icon(
+                    Icons.bar_chart,
+                    color: reportsSelected
+                        ? Palette.greenColor
+                        : Palette.blackColor,
+                  ),
+                  title: Text(
+                    'Reports',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Palette.blackColor,
+                      fontWeight: reportsSelected
+                          ? FontWeight.bold
+                          : FontWeight.normal,
+                    ),
+                  ),
+                  trailing: Icon(
+                    expanded ? Icons.arrow_drop_up : Icons.arrow_drop_down,
+                    color: Palette.blackColor,
+                  ),
+                ),
+              ),
             ),
+            // Expanded dropdown items for Reports.
+            if (expanded)
+              Padding(
+                padding: const EdgeInsets.only(left: 24.0),
+                child: Column(
+                  children: [
+                    // Quota option: navigates to '/reports'
+                    _createDrawerItem(
+                      context: context,
+                      icon: Icons.dataset, // you can change this icon if desired
+                      text: 'Quota',
+                      routeName: '/reports',
+                      currentRoute: currentRoute,
+                      customPadding: const EdgeInsets.symmetric(horizontal: 24.0),
+                    ),
+                    // Tables option: navigates to '/data_tables'
+                    _createDrawerItem(
+                      context: context,
+                      icon: Icons.table_chart,
+                      text: 'Tables',
+                      routeName: '/data_tables',
+                      currentRoute: currentRoute,
+                      customPadding: const EdgeInsets.symmetric(horizontal: 24.0),
+                    ),
+                  ],
+                ),
+              ),
+            // Continue with the remaining drawer items.
             _createDrawerItem(
               context: context,
               icon: Icons.person,
@@ -67,7 +205,8 @@ class MyDrawer extends StatelessWidget {
               currentRoute: currentRoute,
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
               child: Divider(
                 color: Palette.blackColor,
                 thickness: 1.0,
@@ -81,54 +220,6 @@ class MyDrawer extends StatelessWidget {
               currentRoute: currentRoute,
             ),
           ],
-        ),
-      ),
-    );
-  }
-
-  /// Builds a drawer item.
-  ///
-  /// The item is highlighted based on whether the [routeName] matches the
-  /// [currentRoute]. When tapped, it closes the drawer and, if not already
-  /// selected, navigates to the designated page.
-  Widget _createDrawerItem({
-    required BuildContext context,
-    required IconData icon,
-    required String text,
-    required String routeName,
-    required String currentRoute,
-  }) {
-    final bool selected = routeName == currentRoute;
-
-    return InkWell(
-      onTap: () {
-        // If it's not the already selected route, navigate to the new route.
-        Navigator.pop(context);
-        if (!selected) {
-          Navigator.pushReplacementNamed(context, routeName);
-        }
-      },
-      child: AnimatedContainer(
-        duration: Duration(milliseconds: 300),
-        margin: EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
-        decoration: BoxDecoration(
-          color: selected ? Palette.greyColor : Colors.transparent,
-          borderRadius: BorderRadius.circular(8.0),
-        ),
-        child: ListTile(
-          contentPadding: EdgeInsets.symmetric(horizontal: 8.0),
-          leading: Icon(
-            icon,
-            color: selected ? Palette.greenColor : Palette.blackColor,
-          ),
-          title: Text(
-            text,
-            style: TextStyle(
-              fontSize: 16,
-              color: Palette.blackColor,
-              fontWeight: selected ? FontWeight.bold : FontWeight.normal,
-            ),
-          ),
         ),
       ),
     );

@@ -6,9 +6,18 @@ import 'package:pasada_admin_application/screen/main_pages/drivers_pages/drivers
 import 'package:pasada_admin_application/screen/main_pages/reports_pages/reports.dart';
 import 'package:pasada_admin_application/screen/main_pages/ai_chat.dart';
 import 'package:pasada_admin_application/screen/settings_pages/settings.dart';
+import 'package:pasada_admin_application/screen/main_pages/reports_pages/data_tables.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Supabase.initialize(
+    anonKey:
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im90YndoaXR3cm1uZnFncG1uanZmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzMzOTk5MzQsImV4cCI6MjA0ODk3NTkzNH0.f8JOv0YvKPQy8GWYGIdXfkIrKcqw0733QY36wJjG1Fw',
+      url: 'https://otbwhitwrmnfqgpmnjvf.supabase.co'
+  );
   runApp(const MainApp());
 }
 
@@ -29,6 +38,7 @@ class MainApp extends StatelessWidget {
         '/reports': (context) => Reports(),
         '/ai_chat': (context) => AiChat(),
         '/settings': (context) => Settings(),
+        '/data_tables': (context) => DataTables(),
       }
     );
   }
