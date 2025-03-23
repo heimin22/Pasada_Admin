@@ -9,13 +9,8 @@ class MyDrawer extends StatefulWidget {
 }
 
 class _MyDrawerState extends State<MyDrawer> {
-  // When not selected, this flag allows toggling the Reports dropdown.
   bool _reportsExpanded = false;
 
-  /// A standard drawer item.
-  /// Optional parameters:
-  /// - hideIcon: if true, no leading icon is shown.
-  /// - customPadding: allows custom content padding.
   Widget _createDrawerItem({
     required BuildContext context,
     required IconData icon,
@@ -65,10 +60,8 @@ class _MyDrawerState extends State<MyDrawer> {
   @override
   Widget build(BuildContext context) {
     final String currentRoute = ModalRoute.of(context)?.settings.name ?? '';
-    // Determine if the current route is in the Reports group.
     final bool reportsSelected =
-        currentRoute == '/reports' || currentRoute == '/data_tables';
-    // Always show the dropdown when a report route is selected.
+        currentRoute == '/reports' || currentRoute == '/select_table';
     final bool expanded = reportsSelected ? true : _reportsExpanded;
 
     return Drawer(
@@ -162,34 +155,30 @@ class _MyDrawerState extends State<MyDrawer> {
                 ),
               ),
             ),
-            // Expanded dropdown items for Reports.
             if (expanded)
               Padding(
                 padding: const EdgeInsets.only(left: 24.0),
                 child: Column(
                   children: [
-                    // Quota option: navigates to '/reports'
                     _createDrawerItem(
                       context: context,
-                      icon: Icons.dataset, // you can change this icon if desired
+                      icon: Icons.dataset,
                       text: 'Quota',
                       routeName: '/reports',
                       currentRoute: currentRoute,
                       customPadding: const EdgeInsets.symmetric(horizontal: 24.0),
                     ),
-                    // Tables option: navigates to '/data_tables'
                     _createDrawerItem(
                       context: context,
                       icon: Icons.table_chart,
                       text: 'Tables',
-                      routeName: '/data_tables',
+                      routeName: '/select_table',
                       currentRoute: currentRoute,
                       customPadding: const EdgeInsets.symmetric(horizontal: 24.0),
                     ),
                   ],
                 ),
               ),
-            // Continue with the remaining drawer items.
             _createDrawerItem(
               context: context,
               icon: Icons.person,

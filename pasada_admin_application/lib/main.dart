@@ -7,6 +7,7 @@ import 'package:pasada_admin_application/screen/main_pages/reports_pages/reports
 import 'package:pasada_admin_application/screen/main_pages/ai_chat.dart';
 import 'package:pasada_admin_application/screen/settings_pages/settings.dart';
 import 'package:pasada_admin_application/screen/main_pages/reports_pages/data_tables.dart';
+import 'package:pasada_admin_application/screen/main_pages/reports_pages/select_table.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 
@@ -39,6 +40,7 @@ class MainApp extends StatelessWidget {
         '/ai_chat': (context) => AiChat(),
         '/settings': (context) => Settings(),
         '/data_tables': (context) => DataTables(),
+        '/select_table': (context) => SelectTable(),
       }
     );
   }
