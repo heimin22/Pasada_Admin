@@ -9,6 +9,19 @@ class SelectTable extends StatefulWidget {
 }
 
 class _SelectTableState extends State<SelectTable> {
+  // Static list of table names
+  final List<String> tableNames = [
+    'Admin',
+    'Passenger',
+    'Driver',
+    'Vehicle',
+    'Route',
+    'Ride History',
+    'Admin Archives',
+    'Driver Archives',
+    'Passenger Archives',
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,12 +32,16 @@ class _SelectTableState extends State<SelectTable> {
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
-            children: List.generate(16, (index) {
-              return Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0),
-                child: _buildContainer(context, "Item $index"),
-              );
-            }),
+            // Using tableNames.length to generate items dynamically
+            children: List.generate(
+              tableNames.length,
+              (index) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: _buildContainer(context, tableNames[index]),
+                );
+              },
+            ),
           ),
         ),
       ),
@@ -34,9 +51,9 @@ class _SelectTableState extends State<SelectTable> {
   Widget _buildContainer(BuildContext context, String title) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, '/data_tables');
+        Navigator.pushNamed(context, '/data_tables', arguments: title);
       },
-      child: Center( // Center widget added here
+      child: Center(
         child: Container(
           width: MediaQuery.of(context).size.width * 0.47,
           padding: const EdgeInsets.all(16.0),
@@ -65,7 +82,7 @@ class _SelectTableState extends State<SelectTable> {
               ),
               const SizedBox(height: 8.0),
               Text(
-                "Placeholder text for $title",
+                "Database for $title",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 14.0,
