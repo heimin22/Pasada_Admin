@@ -4,6 +4,12 @@ import 'package:pasada_admin_application/screen/appbars_&_drawer/appbar_search.d
 import 'package:pasada_admin_application/screen/appbars_&_drawer/drawer.dart';
 import 'package:pasada_admin_application/screen/main_pages/reports_pages/database_tables/admin_table.dart';
 import 'package:pasada_admin_application/screen/main_pages/reports_pages/database_tables/driver_table.dart';
+import 'package:pasada_admin_application/screen/main_pages/reports_pages/database_tables/passenger_table.dart';
+import 'package:pasada_admin_application/screen/main_pages/reports_pages/database_tables/driverarch_table.dart';
+import 'package:pasada_admin_application/screen/main_pages/reports_pages/database_tables/vehicle_table.dart';
+import 'package:pasada_admin_application/screen/main_pages/reports_pages/database_tables/route_table.dart';
+import 'package:pasada_admin_application/screen/main_pages/reports_pages/database_tables/ridehistory_table.dart';
+import 'package:pasada_admin_application/screen/main_pages/reports_pages/database_tables/adminarch_table.dart';
 
 class SelectTable extends StatefulWidget {
   @override
@@ -52,21 +58,61 @@ class _SelectTableState extends State<SelectTable> {
   Widget _buildContainer(BuildContext context, String title) {
     return GestureDetector(
       onTap: () {
-        if (title == 'Admin') {
-          // Navigate to the admin_table screen if 'Admin' is clicked.
+        switch (title) {
+          case 'Admin':
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => AdminTableScreen()),
+            );
+            break;
+          case 'Driver':
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => DriverTableScreen()),
+            );
+            break;
+          case 'Passenger':
           Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => AdminTableScreen()),
-          );
-        } else if (title == 'Driver') {
-          // Navigate to the driver_table screen if 'Driver' is clicked.
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => DriverTableScreen()),
-          );
-        } else {
-          // For other tables, navigate using named route.
-          Navigator.pushNamed(context, '/data_tables', arguments: title);
+              context,
+              MaterialPageRoute(builder: (context) => PassengerTableScreen()),
+            );
+            break;
+          case 'Vehicle':
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => VehicleTableScreen()),
+            );
+            break;
+          case 'Route':
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => DriverRouteTableScreen()),
+            );
+            break;
+          case 'Ride History':
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => RideHistoryTableScreen()),
+            );
+            break;
+          case 'Admin Archives':
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => AdminArchTableScreen()),
+            );
+            break;
+          case 'Driver Archives':
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => DriverArchTableScreen()),
+            );
+            break;
+          case 'Passenger Archives':
+            // Do nothing (or optionally handle this case separately)
+            break;
+          default:
+            Navigator.pushNamed(context, '/data_tables', arguments: title);
+            break;
         }
       },
       child: Center(

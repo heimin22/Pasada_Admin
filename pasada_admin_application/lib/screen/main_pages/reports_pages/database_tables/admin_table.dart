@@ -46,33 +46,69 @@ class _AdminTableScreenState extends State<AdminTableScreen> {
       backgroundColor: Palette.whiteColor,
       appBar: AppBarSearch(),
       drawer: MyDrawer(),
-      body: isLoading
-          ? const Center(child: CircularProgressIndicator())
-          : adminData.isEmpty
-              ? const Center(child: Text("No data found."))
-              : SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: DataTable(
-                    columns: const [
-                      DataColumn(label: Text('Admin ID')),
-                      DataColumn(label: Text('First Name')),
-                      DataColumn(label: Text('Last Name')),
-                      DataColumn(label: Text('Mobile Number')),
-                      DataColumn(label: Text('Password')),
-                      DataColumn(label: Text('Created At')),
-                    ],
-                    rows: adminData.map((admin) {
-                      return DataRow(cells: [
-                        DataCell(Text(admin['admin_id'].toString())),
-                        DataCell(Text(admin['first_name'].toString())),
-                        DataCell(Text(admin['last_name'].toString())),
-                        DataCell(Text(admin['admin_mobile_number'].toString())),
-                        DataCell(Text(admin['admin_password'].toString())),
-                        DataCell(Text(admin['created_at'].toString())),
-                      ]);
-                    }).toList(),
-                  ),
+      // Wrap the body in a Stack to overlay the back button
+      body: Stack(
+        children: [
+          // Main content for data table
+          isLoading
+              ? const Center(child: CircularProgressIndicator())
+              : adminData.isEmpty
+                  ? const Center(child: Text("No data found."))
+                  : SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Container(
+                        margin: const EdgeInsets.all(16.0),
+                        decoration: BoxDecoration(
+                          color: Palette.whiteColor,
+                          borderRadius: BorderRadius.circular(16.0),
+                          border: Border.all(
+                            color: Palette.blackColor.withValues(alpha: 128),
+                            width: 1,
+                          ),
+                        ),
+                        child: DataTable(
+                          columns: const [
+                            DataColumn(label: Text('Admin ID')),
+                            DataColumn(label: Text('First Name')),
+                            DataColumn(label: Text('Last Name')),
+                            DataColumn(label: Text('Mobile Number')),
+                            DataColumn(label: Text('Password')),
+                            DataColumn(label: Text('Created At')),
+                          ],
+                          rows: adminData.map((admin) {
+                            return DataRow(cells: [
+                              DataCell(Text(admin['admin_id'].toString())),
+                              DataCell(Text(admin['first_name'].toString())),
+                              DataCell(Text(admin['last_name'].toString())),
+                              DataCell(Text(admin['admin_mobile_number'].toString())),
+                              DataCell(Text(admin['admin_password'].toString())),
+                              DataCell(Text(admin['created_at'].toString())),
+                            ]);
+                          }).toList(),
+                        ),
+                      ),
+                    ),
+          Positioned(
+            top: 26.0,
+            left: 26.0,
+            child: SafeArea(
+              child: Container(
+                decoration: BoxDecoration(
+                  border: Border.all(color: Palette.blackColor, width: 1.0),
+                  borderRadius: BorderRadius.circular(30.0),
                 ),
+                child: IconButton(
+                  iconSize: 28.0,
+                  icon: const Icon(Icons.arrow_back, color: Palette.blackColor),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
