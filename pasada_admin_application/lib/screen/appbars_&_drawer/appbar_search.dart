@@ -90,7 +90,7 @@ class AppBarSearch extends StatelessWidget implements PreferredSizeWidget {
                     decoration: InputDecoration(
                       hintText: 'Search for Modern Jeepney ID',
                       hintStyle: TextStyle(
-                        color: Palette.blackColor.withOpacity(0.5),
+                        color: Palette.blackColor.withValues(alpha: 128),
                         fontSize: 16.0,
                       ),
                       border: OutlineInputBorder(

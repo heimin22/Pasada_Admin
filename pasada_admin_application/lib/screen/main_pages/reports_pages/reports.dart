@@ -35,7 +35,7 @@ class Reports extends StatefulWidget {
                   borderRadius: BorderRadius.circular(10.0),
                   boxShadow: [
                               BoxShadow(
-                                color: Colors.grey.withOpacity(0.5),
+                                color: Palette.blackColor.withValues(alpha: 128),
                                 spreadRadius: 2,
                                 blurRadius: 5,
                                 offset: Offset(0, 3),
@@ -91,7 +91,7 @@ class Reports extends StatefulWidget {
                       borderRadius: BorderRadius.circular(10.0),
                       boxShadow: [
                               BoxShadow(
-                                color: Colors.grey.withOpacity(0.5),
+                                color: Palette.blackColor.withValues(alpha: 128),
                                 spreadRadius: 2,
                                 blurRadius: 5,
                                 offset: Offset(0, 3), // changes position of shadow

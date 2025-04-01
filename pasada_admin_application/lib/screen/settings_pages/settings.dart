@@ -90,7 +90,7 @@ class _SettingsState extends State<Settings> {
           borderRadius: BorderRadius.circular(8.0),
           boxShadow: [
             BoxShadow(
-              color: Palette.blackColor.withOpacity(0.5),
+              color: Palette.blackColor.withValues(alpha: 128),
               spreadRadius: 2,
               blurRadius: 5,
               offset: Offset(0, 3),
@@ -115,7 +115,7 @@ class _SettingsState extends State<Settings> {
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 14.0,
-                color: Palette.blackColor.withOpacity(0.5),
+                color: Palette.blackColor.withValues(alpha: 128),
               ),
             ),
           ],

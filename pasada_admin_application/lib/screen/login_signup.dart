@@ -33,7 +33,7 @@ class _LoginSignupState extends State<LoginSignup> {
                 border: Border.all(color: Palette.blackColor),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.2),
+                    color: Colors.black.withValues(alpha: 51),
                     spreadRadius: 5,
                     blurRadius: 15,
                   ),

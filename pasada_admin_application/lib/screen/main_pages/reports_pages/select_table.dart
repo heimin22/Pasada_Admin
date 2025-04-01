@@ -45,7 +45,7 @@ class _SelectTableState extends State<SelectTable> {
             borderRadius: BorderRadius.circular(8.0),
             boxShadow: [
               BoxShadow(
-                color: Palette.blackColor.withOpacity(0.5),
+                color: Palette.blackColor.withValues(alpha: 128),
                 spreadRadius: 2,
                 blurRadius: 5,
                 offset: const Offset(0, 3),
@@ -69,7 +69,7 @@ class _SelectTableState extends State<SelectTable> {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 14.0,
-                  color: Palette.blackColor.withOpacity(0.5),
+                  color: Palette.blackColor.withValues(alpha: 128),
                 ),
               ),
             ],
