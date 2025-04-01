@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:pasada_admin_application/config/palette.dart';
 import 'package:pasada_admin_application/screen/appbars_&_drawer/appbar_search.dart';
 import 'package:pasada_admin_application/screen/appbars_&_drawer/drawer.dart';
+import 'package:pasada_admin_application/screen/main_pages/reports_pages/database_tables/admin_table.dart';
+import 'package:pasada_admin_application/screen/main_pages/reports_pages/database_tables/driver_table.dart';
 
 class SelectTable extends StatefulWidget {
   @override
@@ -32,7 +34,6 @@ class _SelectTableState extends State<SelectTable> {
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
-            // Using tableNames.length to generate items dynamically
             children: List.generate(
               tableNames.length,
               (index) {
@@ -51,7 +52,22 @@ class _SelectTableState extends State<SelectTable> {
   Widget _buildContainer(BuildContext context, String title) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, '/data_tables', arguments: title);
+        if (title == 'Admin') {
+          // Navigate to the admin_table screen if 'Admin' is clicked.
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => AdminTableScreen()),
+          );
+        } else if (title == 'Driver') {
+          // Navigate to the driver_table screen if 'Driver' is clicked.
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => DriverTableScreen()),
+          );
+        } else {
+          // For other tables, navigate using named route.
+          Navigator.pushNamed(context, '/data_tables', arguments: title);
+        }
       },
       child: Center(
         child: Container(
