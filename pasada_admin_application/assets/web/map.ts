@@ -1,4 +1,4 @@
-class MapManager {
+class MapManagers {
   private map: google.maps.Map | null = null;
   private defaultPosition = { lat: 14.191723, lng: 120.971812 }; // fallback position
 
