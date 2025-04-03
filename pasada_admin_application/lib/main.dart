@@ -8,17 +8,27 @@ import 'package:pasada_admin_application/screen/main_pages/ai_chat.dart';
 import 'package:pasada_admin_application/screen/settings_pages/settings.dart';
 import 'package:pasada_admin_application/screen/main_pages/reports_pages/data_tables.dart';
 import 'package:pasada_admin_application/screen/main_pages/reports_pages/select_table.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load(fileName: ".env");
 
+  // initializing supabase using the .env file
   await Supabase.initialize(
-    anonKey:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im90YndoaXR3cm1uZnFncG1uanZmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzMzOTk5MzQsImV4cCI6MjA0ODk3NTkzNH0.f8JOv0YvKPQy8GWYGIdXfkIrKcqw0733QY36wJjG1Fw',
-      url: 'https://otbwhitwrmnfqgpmnjvf.supabase.co'
-  );
+      url: dotenv.env['SUPABASE_URL']!,
+      anonKey: dotenv.env['SUPABASE_ANON_KEY']!,
+      authOptions: const FlutterAuthClientOptions(
+        authFlowType: AuthFlowType.pkce,
+      ),
+      realtimeClientOptions: const RealtimeClientOptions(
+        logLevel: RealtimeLogLevel.info,
+      ),
+      storageOptions: const StorageClientOptions(
+        retryAttempts: 10,
+      ));
+
   runApp(const MainApp());
 }
 
@@ -27,21 +37,20 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Login Pasada Admin',
-      home: LoginSignup(),
-      routes: {
-        '/dashboard': (context) => Dashboard(),
-        '/login': (context) => LoginSignup(),
-        '/fleet': (context) => Fleet(),
-        '/drivers': (context) => Drivers(),
-        '/reports': (context) => Reports(),
-        '/ai_chat': (context) => AiChat(),
-        '/settings': (context) => Settings(),
-        '/data_tables': (context) => DataTables(),
-        '/select_table': (context) => SelectTable(),
-      }
-    );
+    return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Login Pasada Admin',
+        home: LoginSignup(),
+        routes: {
+          '/dashboard': (context) => Dashboard(),
+          '/login': (context) => LoginSignup(),
+          '/fleet': (context) => Fleet(),
+          '/drivers': (context) => Drivers(),
+          '/reports': (context) => Reports(),
+          '/ai_chat': (context) => AiChat(),
+          '/settings': (context) => Settings(),
+          '/data_tables': (context) => DataTables(),
+          '/select_table': (context) => SelectTable(),
+        });
   }
 }
