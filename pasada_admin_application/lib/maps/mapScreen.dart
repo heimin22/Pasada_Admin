@@ -16,7 +16,6 @@ class MapsScreenState extends State<Mapscreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     webViewController = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
