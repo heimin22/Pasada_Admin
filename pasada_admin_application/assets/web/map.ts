@@ -40,5 +40,25 @@ class MapManager {
   }
 
   // getting user's position my nigga
-  
+  private getUserPosition(): Promise<google.maps.LatLngLiteral | null> {
+    return new Promise((resolve) => {
+      if (!navigator.geolocation) {
+        resolve(null);
+        return;
+      }
+
+      navigator.geolocation.getCurrentPosition(
+        (position) => resolve({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        }),
+        (error) => {
+          console.error('Geolocation error:', error);
+          resolve(null);
+        },
+        { timeout: 5000 }
+      );
+    });
+  }
 }
+
