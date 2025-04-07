@@ -16,7 +16,10 @@ class _DashboardState extends State<Dashboard> {
       backgroundColor: Palette.whiteColor,
       appBar: AppBarSearch(),
       drawer: MyDrawer(),
-      body: const Mapscreen(),
+      // body: const Mapscreen(),
+      body: Text(
+        'This is the Dashboard screen',
+      ),
     );
   }
 }
