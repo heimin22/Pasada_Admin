@@ -18,26 +18,10 @@ class MapsScreenState extends State<Mapscreen> {
     super.initState();
     webViewController = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
+      ..loadFlutterAsset('assets/web/map.html')
       ..addJavaScriptChannel('ApiKeyChannel', onMessageReceived: (message) {
-        webViewController.runJavaScript('''
-      initializeMap("${apiKey}");
-    ''');
-      })
-      ..loadHtmlString('''
-    <!DOCTYPE html>
-    <html>
-    <head>
-      <script src="map.js"></script>
-    </head>
-    <body>
-      <div id="map" style="height:100vh"></div>
-      <script>
-        // Initialize map after API key is received
-        window.ApiKeyChannel.postMessage("ready");
-      </script>
-    </body>
-    </html>
-  ''');
+        webViewController.runJavaScript('initializeMap("${apiKey}");');
+      });
   }
 
   @override

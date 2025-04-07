@@ -1,8 +1,13 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <!-- API key will be injected dynamically -->
-</head>
+    <head>
+        <script src="map.js"></script>
+        <script>
+          function initializeMap(apiKey) {
+            new MapManager(apiKey);
+          }
+        </script>
+      </head>
 <body>
     <div id="map" style="height:100vh"></div>
     <script src="map.js"></script>
