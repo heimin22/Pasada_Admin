@@ -55,7 +55,7 @@ class _SettingsState extends State<Settings> {
             },
           );
         }
-        if (title == "Real-Time Updates"){
+        if (title == "Real-Time Updates") {
           showDialog(
             context: context,
             builder: (BuildContext context) {
@@ -63,7 +63,7 @@ class _SettingsState extends State<Settings> {
             },
           );
         }
-        if (title == "Security"){
+        if (title == "Security") {
           showDialog(
             context: context,
             builder: (BuildContext context) {
@@ -78,8 +78,7 @@ class _SettingsState extends State<Settings> {
               return NotifPopUp();
             },
           );
-        }
-         else {
+        } else {
           print("$title container clicked");
         }
       },

@@ -7,7 +7,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-class MapManager {
+class MapManagers {
+    static initialize(apiKey) {
+        new MapManagers(apiKey);
+    }
     constructor(apiKey) {
         this.map = null;
         this.defaultPosition = { lat: 14.191723, lng: 120.971812 }; // fallback position

@@ -1,3 +1,5 @@
+import 'dart:io' show Platform;
+
 import 'package:flutter/material.dart';
 import 'package:pasada_admin_application/screen/main_pages/dashboard_pages/dashboard.dart';
 import 'package:pasada_admin_application/screen/login_signup.dart';
@@ -11,8 +13,7 @@ import 'package:pasada_admin_application/screen/main_pages/reports_pages/select_
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-
-Future<void> main() async {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: ".env");
 

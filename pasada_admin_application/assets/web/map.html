@@ -1,4 +1,15 @@
 <!DOCTYPE html>
-<script src="map.js"></script>
-<div id="map" style="height:100vh"></div>
+<html>
+    <head>
+        <script src="map.js"></script>
+        <script>
+          function initializeMap(apiKey) {
+            new MapManager(apiKey);
+          }
+        </script>
+      </head>
+<body>
+    <div id="map" style="height:100vh"></div>
+    <script src="map.js"></script>
+</body>
 </html>

@@ -2,7 +2,11 @@ class MapManagers {
   private map: google.maps.Map | null = null;
   private defaultPosition = { lat: 14.191723, lng: 120.971812 }; // fallback position
 
-  constructor(apiKey: string) {
+  static initialize(apiKey: string) {
+    new MapManagers(apiKey);
+  }
+
+  private constructor(apiKey: string) {
     this.initializeMap(apiKey);
   }
 
