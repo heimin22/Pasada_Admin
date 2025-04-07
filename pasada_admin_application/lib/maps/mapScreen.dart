@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -19,7 +18,26 @@ class MapsScreenState extends State<Mapscreen> {
     super.initState();
     webViewController = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..loadFlutterAsset('assets/web/map.html');
+      ..addJavaScriptChannel('ApiKeyChannel', onMessageReceived: (message) {
+        webViewController.runJavaScript('''
+      initializeMap("${apiKey}");
+    ''');
+      })
+      ..loadHtmlString('''
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <script src="map.js"></script>
+    </head>
+    <body>
+      <div id="map" style="height:100vh"></div>
+      <script>
+        // Initialize map after API key is received
+        window.ApiKeyChannel.postMessage("ready");
+      </script>
+    </body>
+    </html>
+  ''');
   }
 
   @override
